@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #Script das aulas de Estatística Básica em R 
 
 #Tipos de Dados
@@ -110,3 +111,6 @@ sorted_data %>%
   e_color(color = "#4292b5") %>%
   e_tooltip() %>%
   e_title(text = "Renda mensal por JobRole", subtext = "Em milhares de USD.")
+=======
+#Script das aulas de Estatística Básica em R 
+>>>>>>> 6660c0eae39788e33a5b854db0ea1feb713e4a94
