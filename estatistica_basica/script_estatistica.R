@@ -1,0 +1,1 @@
+#Script das aulas de Estatística Básica em R 
