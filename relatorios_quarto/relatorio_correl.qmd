@@ -1,0 +1,102 @@
+---
+title: "Relatório Correlação"
+author: "Isabella Stersa"
+format: 
+  html:
+    self-contained: true
+    transition: slide
+editor: visual
+---
+
+## Correlação
+
+A correlação é uma medida estatística que descreve a extensão na qual duas variáveis estão relacionadas. Uma correlação positiva indica que, à medida que uma variável aumenta, a outra tende a aumentar. Esse caso nos lembra o que estudamos na escola como "diretamente proporcional", sem que seja, de fato, proporcional.
+
+Por outro lado, uma correlação negativa indica que, à medida que uma variável aumenta, a outra tende a diminuir. Novamente, lembrando o tal do "inversamente proporcional".
+
+## Visualização da correlação entre variáveis
+
+Podemos visualizar correlação de diversas formas, sendo a mais comum o gráfico de dispersão (scatterplot). Mas esse tipo de gráfico acaba não sendo viável quando estamos tratando com diversas variáveis, ficando um gráfico poluido e de difícil interpretação.
+
+Utilizaremos este relatório, um mapa de calor (heatmap) que visualiza as correlações entre diferentes variáveis de um conjunto de dados. O mapa de calor é uma ferramenta poderosa que permite identificar rapidamente padrões de correlação positiva ou negativa entre diversas variáveis.
+
+## Preparação do heatmap
+
+Para esse estudo, estamos utilizando um dataset público feito pela IBM. Esse datase contém informações sobre os funcionários fictícios de uma empresa, incluindo vários atributos que podem influenciar a rotatividade (attrition) dos funcionários.
+
+Iniciamos trazendo o dataset para o Rstudio.
+
+```{r}
+#Lendo o arquivo
+library(dplyr)
+library(readr)
+
+dados_rh <- read_csv(
+  "https://raw.githubusercontent.com/wrprates/open-data/master/ibm_hr_emplyee_attrition.csv")
+```
+
+## Continuando a preparação
+
+O dataset em questão apresenta diversas colunas, mas para o nosso estudo inicial de correlação, queremos utilizar apenas colunas numéricas e também excluir algumas colunas que não queremos trabalhar.
+
+```{r}
+#Deixando apenas colunas numericas e tirando outras
+dados_rh_num <- dados_rh %>%
+  select_if(is.numeric) %>%
+    select(
+    -c(
+    Education, 
+    EmployeeNumber, 
+    EmployeeCount, 
+    JobLevel, 
+    StockOptionLevel, 
+    WorkLifeBalance, 
+    StandardHours
+    )
+  )
+```
+
+## HeatMap (mapa de calor)
+
+Temos agora o objeto com as colunas selecionadas. Calculamos inicialmente o coeficiente de correlação do dataframe utilizando o método Spearman, pois estamos trabalhando com variáveis contínuas e discretas.
+
+Abaixo apresentamos nosso mapa de calor, onde, na escala de cor, o vermelho representa correlação perfeita positiva e amarelo representa correlação perfeita negativa.
+
+```{r}
+#Calculando correlacao. 
+correl_dados_rh_num <- dados_rh_num %>%
+  cor(method = "spearman" )
+
+#Criando o heatmap
+library(echarts4r)
+cor_chart_rh <- cor(correl_dados_rh_num) %>%
+  e_charts() %>%
+  e_correlations(
+    order = "hclust",
+    visual_map = FALSE
+  ) %>%
+  e_visual_map(
+    min = -1,
+    max = 1
+  ) %>%
+  e_tooltip()
+
+#Chamando o heatmap
+cor_chart_rh
+```
+
+## Conclusão
+
+Fazendo a análise rápida do heatmap, percebemos alguma relações positivas fortes.
+
+-   **Relações Temporais:**
+
+    -   Há correlações fortes entre os anos no cargo atual, na empresa e com o mesmo gerente, indicando que o tempo de serviço e as relações de trabalho são interdependentes.
+
+-   **Experiência e Remuneração:**
+
+    -   Existe uma correlação positiva forte entre anos totais de trabalho e renda mensal, refletindo o impacto da experiência na remuneração.
+
+-   **Desempenho e Reconhecimento Financeiro:**
+
+    -   Funcionários com avaliações de desempenho mais altas tendem a receber aumentos salariais percentuais maiores, destacando a correlação entre desempenho e reconhecimento financeiro.
