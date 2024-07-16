@@ -110,3 +110,100 @@ sorted_data %>%
   e_color(color = "#4292b5") %>%
   e_tooltip() %>%
   e_title(text = "Renda mensal por JobRole", subtext = "Em milhares de USD.")
+
+#####################################
+###          CORRELAÇÃO           ###
+#####################################
+
+x1 <- mtcars$mpg
+y1 <- mtcars$hp
+
+#Calculando o coeficiente de correlação entre x e y
+#Por padrão, a funcao cor utiliza o método Pearson
+#Nesse caso, x1 e y1 são continuas, entao ok usar Pearson
+cor(x1,y1) 
+
+#Nesse caso x2 e y2 são discretas 
+x2 <- mtcars$cyl
+y2 <- mtcars$gear
+
+#Para calcular esse coeficiente de correlação, devemos usar o método Spearman ou Kendall
+cor(x2, y2, method = "spearman")
+
+#MATRIZ DE CORRELAÇÃO 
+cor(mtcars) %>%
+  as_tibble()
+
+#Mantendo apenas uma diagonal (para não ter valores duplicado. Mais fácil visualizar)
+install.packages("rstatix")
+library("rstatix")
+
+replace_upper_triangle(cor(mtcars), by = NA, diagonal = TRUE) %>%
+  as_tibble()
+
+#Mapa de calor
+
+library(echarts4r)
+cor_chart <- cor(mtcars) %>%
+  e_charts() %>%
+  e_correlations(
+    order = "hclust",
+    visual_map = FALSE
+  ) %>%
+  e_visual_map(
+    min = -1,
+    max = 1
+  ) %>%
+  e_tooltip()
+
+#chamando o objeto criado
+cor_chart
+
+#Gráfico mais usado para correcalcao = scatterplot (nem sempre viável)
+mtcars %>%
+  e_charts(mpg) %>%
+  e_scatter(wt, qsec)
+
+#Exemplo
+library(dplyr)
+library(readr)
+
+#lendo o arquivo
+dados_rh <- read_csv(
+  "https://raw.githubusercontent.com/wrprates/open-data/master/ibm_hr_emplyee_attrition.csv")
+
+#deixando apenas colunas numericas e tirando outras
+dados_rh_num <- dados_rh %>%
+    select_if(is.numeric) %>%
+  select(
+  -c(
+  Education, 
+  EmployeeNumber, 
+  EmployeeCount, 
+  JobLevel, 
+  StockOptionLevel, 
+  WorkLifeBalance, 
+  StandardHours
+  )
+  )
+
+#Calculando correlacao. Usando spearman pois há variaveis continuas e discretas
+correl_dados_rh_num <- dados_rh_num %>%
+  cor(method = "spearman" )
+
+library(echarts4r)
+cor_chart_rh <- cor(correl_dados_rh_num) %>%
+  e_charts() %>%
+  e_correlations(
+    order = "hclust",
+    visual_map = FALSE
+  ) %>%
+  e_visual_map(
+    min = -1,
+    max = 1
+  ) %>%
+  e_tooltip()
+
+#chamando o objeto criado
+cor_chart_rh
+
