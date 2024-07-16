@@ -111,7 +111,6 @@ sorted_data %>%
   e_tooltip() %>%
   e_title(text = "Renda mensal por JobRole", subtext = "Em milhares de USD.")
 
-
 #####################################
 ###          CORRELAÇÃO           ###
 #####################################
