@@ -26,20 +26,21 @@ Para esse estudo, estamos utilizando um dataset público feito pela IBM. Esse da
 
 Iniciamos trazendo o dataset para o Rstudio.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 #Lendo o arquivo
 library(dplyr)
 library(readr)
 
 dados_rh <- read_csv(
   "https://raw.githubusercontent.com/wrprates/open-data/master/ibm_hr_emplyee_attrition.csv")
+
 ```
 
 ## Continuando a preparação
 
 O dataset em questão apresenta diversas colunas, mas para o nosso estudo inicial de correlação, queremos utilizar apenas colunas numéricas e também excluir algumas colunas que não queremos trabalhar.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 #Deixando apenas colunas numericas e tirando outras
 dados_rh_num <- dados_rh %>%
   select_if(is.numeric) %>%
@@ -62,7 +63,7 @@ Temos agora o objeto com as colunas selecionadas. Calculamos inicialmente o coef
 
 Abaixo apresentamos nosso mapa de calor, onde, na escala de cor, o vermelho representa correlação perfeita positiva e amarelo representa correlação perfeita negativa.
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 #Calculando correlacao. 
 correl_dados_rh_num <- dados_rh_num %>%
   cor(method = "spearman" )
