@@ -21,5 +21,15 @@ Exercícios incluem análise de dados do mundo, criação de mapas e rasters, e 
 
 ### Recursos Utilizados
 
--   **Pacotes R**: `sf`, `terra`, `spData`, `spDataLarge`
+-   **Pacotes R**: 'sf', 'terra', 'spData', 'spDataLarge'
 -   **Dados**: Exemplos de dados vetoriais e raster fornecidos pelos pacotes `spData` e `spDataLarge`.
+
+## Capítulo 3: Operações com Dados Atributivos {#capítulo-3-operações-com-dados-atributivos}
+
+**Dados Vetoriais**: Utiliza o pacote sf para manipulação e análise de dados vetoriais, incluindo operações de seleção, filtragem e renomeação de atributos, além de agrupamento e junção de dados.
+
+**Dados Raster**: Usa o pacote terra para operações básicas com dados raster, como visualização e análise de propriedades de resolução e extensão.
+
+### Recursos Utilizados
+- **Pacotes R**: 'sf', 'terra', 'dplyr'
+- **Dados**: Exemplos de dados vetoriais e raster utilizados para manipulação e análise.
