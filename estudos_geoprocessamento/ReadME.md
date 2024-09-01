@@ -10,6 +10,8 @@ O livro *Geocomputation with R* é um recurso acessível e valioso para quem des
 
 1.  [Capítulo 2: Dados Geográficos em R](#capítulo-2-dados-geográficos-em-r)
 2.  [Capítulo 3: Operações com Dados Atributivos](#capítulo-3-operações-com-dados-atributivos)
+3.  [Capítulo 4: Operações com Dados Espaciais](#capítulo-4-operações-com-dados-espaciais)
+4.  [Capítulo 5: Operações Geométricas](#capítulo-5-operações-geométricas)
 
 ## Capítulo 2: Dados Geográficos em R {#capítulo-2-dados-geográficos-em-r}
 
@@ -33,3 +35,27 @@ Exercícios incluem análise de dados do mundo, criação de mapas e rasters, e 
 ### Recursos Utilizados
 - **Pacotes R**: 'sf', 'terra', 'dplyr'
 - **Dados**: Exemplos de dados vetoriais e raster utilizados para manipulação e análise.
+
+## Capítulo 4: Operações com Dados Espaciais {#capítulo-4-operações-com-dados-espaciais}
+
+**Dados Vetoriais**: São realizadas operações de subconjunto espacial, junção e agregação, relações topológicas, relações de distância entre geometrias, além de junção espacial. 
+
+**Dados Raster**: Apesar o livro trazer operações espaciais com dados raster, esses não foram abordados no estudo. 
+
+Os exercícios incluem a identificação e visualização de pontos altos em regiões específicas, a análise das relações espaciais entre áreas geográficas, como interseções e proximidade, e a criação de rotas para identificar regiões cruzadas.
+
+### Recursos Utilizados
+- **Pacotes R**: 'sf', 'terra', 'spData', 'spDataLarge'
+- **Dados**: Exemplos de dados vetoriais e raster fornecidos pelos pacotes spData e spDataLarge, que incluem conjuntos de dados geoespaciais como regiões da Nova Zelândia e estados dos EUA.
+
+## Capítulo 5: Operações Geométricas {#capítulo-5-operações-geométricas}
+
+**Dados Vetoriais**: Este capítulo aborda o processamento e simplificação de dados vetoriais, com foco em operações de geoprocessamento, incluindo a simplificação de geometrias, cálculo de propriedades espaciais, e operações como criação de buffers, determinação de centróides, recorte, uniões geométricas e transformações afins e de tipo.
+
+**Dados Raster**: Este capítulo explora o processamento e análise de dados raster, incluindo operações de reclassificação, resampling, cálculo de estatísticas zonais e transformação de projeções. Envolve a manipulação de imagens e dados contínuos para análise espacial.
+
+Os exercícios incluem práticas de processamento e análise de dados vetoriais e raster, como simplificação de geometria, criação de buffers, reclassificação de raster e cálculos estatísticos, além da aplicação de técnicas de transformação e análise espacial.
+
+### Recursos Utilizados
+- **Pacotes R**: 'sf', 'terra', 'spData', 'spDataLarge'
+- **Dados**: Exemplos de dados vetoriais e raster fornecidos pelos pacotes spData e spDataLarge, que incluem conjuntos de dados geoespaciais como regiões da Nova Zelândia e estados dos EUA.
